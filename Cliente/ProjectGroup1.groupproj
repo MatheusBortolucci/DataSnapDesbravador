@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{594844B9-CAF7-4E30-B3F5-CB0F25C26212}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\ProvaDesbravador.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Cliente.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProvaDesbravador">
+        <MSBuild Projects="..\ProvaDesbravador.dproj"/>
+    </Target>
+    <Target Name="ProvaDesbravador:Clean">
+        <MSBuild Projects="..\ProvaDesbravador.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProvaDesbravador:Make">
+        <MSBuild Projects="..\ProvaDesbravador.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Cliente">
+        <MSBuild Projects="Cliente.dproj"/>
+    </Target>
+    <Target Name="Cliente:Clean">
+        <MSBuild Projects="Cliente.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Cliente:Make">
+        <MSBuild Projects="Cliente.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProvaDesbravador;Cliente"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProvaDesbravador:Clean;Cliente:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProvaDesbravador:Make;Cliente:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
